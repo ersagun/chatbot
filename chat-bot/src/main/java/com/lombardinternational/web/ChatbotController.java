@@ -5,15 +5,11 @@ package com.lombardinternational.web;
  */
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.*;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.web.bind.annotation.*;
 import com.lombardinternational.domain.*;
 
+
 @RestController
-    @EnableAutoConfiguration
     public class ChatbotController {
 
         /**
@@ -34,14 +30,19 @@ import com.lombardinternational.domain.*;
          */
 
 
-        @Autowired
         Command cmd;
+
+
+
+    @Autowired
+        public ChatbotController(Command cmd){
+            this.cmd=cmd;
+    }
 
 
         @RequestMapping("/getInformation/{text}")
         public @ResponseBody
         CommandMessage home(@PathVariable(value = "text") String text) {
-         return cmd.sendCommand(text);
-            //return text;
+         return cmd.sendCommand();
         }
     }

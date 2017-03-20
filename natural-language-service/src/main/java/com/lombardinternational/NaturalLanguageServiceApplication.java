@@ -4,6 +4,7 @@ import com.lombardinternational.domain.CommandMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.integration.annotation.Transformer;
@@ -23,10 +24,10 @@ public class NaturalLanguageServiceApplication {
 	//@StreamListener(Processor.INPUT)
 	//@Output(Processor.OUTPUT)
 
-	//@Transformer(inputChannel = Processor.INPUT, outputChannel = Processor.OUTPUT)
+
 	@StreamListener(Processor.INPUT)
 	@SendTo(Processor.OUTPUT)
-	public Flux<CommandMessage> log( CommandMessage data){
+	public Flux<CommandMessage> log(CommandMessage data){
 		//System.out.println(data);
 		System.out.println(data.toString());
 		//Generator g = new Generator(data);
